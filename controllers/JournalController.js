@@ -25,4 +25,44 @@ const CreateJournal = async (req,res) => {
   }
 }
 
-module.exports = {getAllJournalEntries , CreateJournal}
+
+// search for journal by name 
+const JournalSearch = async (req , res) => {
+  try {
+    const journal = await JournalEntry.find({title: req.params.title});
+    res.json(journal);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+};
+
+// delete a journal entry by name 
+const DeleteJournal = async (req , res) => {
+  try {
+    const journal = await JournalEntry.find({title: req.params.title});
+    res.json(journal);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+};
+
+// edit the contents of a journal entry by name
+const EditJournal = async (req , res) => {
+  try {
+    const journal = await JournalEntry.find({title: req.params.title});
+    journal.title = req.body.title;
+    journal.body = req.body.body;
+    journal.user = req.body.user;
+    journal.location = req.body.location;
+    journal.photos = req.body.photos;
+    journal.notes = req.body.notes;
+    res.json(journal);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+};
+
+module.exports = {getAllJournalEntries , CreateJournal , JournalSearch , DeleteJournal , EditJournal}

@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+const User = require("../models/UserModel");
 const Protect = async (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
@@ -17,4 +19,4 @@ const Protect = async (req, res, next) => {
   }
 };
 
-module.exports = Protect ;
+module.exports = Protect;
