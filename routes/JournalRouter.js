@@ -13,6 +13,6 @@ const {
 router.route("/").get(getAllJournalEntries, JournalSearch);
 router.route("/create").post(CreateJournal);
 router.route("/delete").delete(DeleteJournal);
-router.route("/edit").put(EditJournal);
+router.route("/:edit").put(EditJournal);
 
 module.exports = router;
