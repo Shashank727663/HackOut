@@ -33,27 +33,27 @@ const register = async (req, res) => {
 
 // for login
 const authUser = async (req, res) => {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    try {
-      // Check if user exists
-      const user = await UserModel.findOne({ email });
-      if (user && (await user.matchPasswords(password))) {
-        res.json({
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          pic: user.pic,
-          token: generateToken(user._id) 
-          // token i am sending back to the frontend
-        });
-      } else {
-        res.status(401).json({ message: 'Invalid email or password' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
-  
+  try {
+    // Check if user exists
+    const user = await UserModel.findOne({ email });
+    if (user && (await user.matchPasswords(password))) {
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        pic: user.pic,
+        token: generateToken(user._id)
+        // token i am sending back to the frontend
+      });
+    } else {
+      res.status(401).json({ message: "Invalid email or password" });
     }
-  };
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
+
 module.exports = { register, authUser };

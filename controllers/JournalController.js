@@ -4,7 +4,7 @@ const JournalEntry = require('../models/JournalModel');
 // for getting all the journal entries
 const getAllJournalEntries = async (req, res) => {
   try {
-    const journalEntries = await JournalEntry.find();
+    const journalEntries = await JournalEntry.find({});
     res.json(journalEntries);
   } catch (error) {
     res.status(500).json({ message: error.message });
